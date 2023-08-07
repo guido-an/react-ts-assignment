@@ -1,7 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import AddCardForm from '../components/AddCardForm';
 
-describe('AddCardForm', () => {
+describe('Test AddCardForm component', () => {
   test('should submit the form with correct data', () => {
     // Create a mock function for the addNewCard prop
     const mockAddNewCard = jest.fn();
@@ -19,17 +19,18 @@ describe('AddCardForm', () => {
     fireEvent.change(screen.getByLabelText(/category/i), { target: { value: 'Technology' } });
     fireEvent.change(screen.getByLabelText(/author/i), { target: { value: loggedInUser.name } });
 
-
     // Simulate form submission by clicking the submit button
     fireEvent.click(screen.getByTestId('add-card-button'));
 
     // Assert that the mock function is called with the correct data
+    const { id, name } = loggedInUser
+
     expect(mockAddNewCard).toHaveBeenCalledWith({
       name: 'Test Card',
       status: 'Published',
       content: 'This is a test card content.',
       category: 'Technology',
-      author: loggedInUser.name,
+      author: { id, name }, 
     });
   });
 });

@@ -18,16 +18,23 @@ const getInitialFormData = (): Card => ({
     const [formData, setFormData] = useState<Card>(getInitialFormData);
   
     const handleSubmit = (e: React.FormEvent) => {
-      e.preventDefault();
-      const cardWithAuthor = { ...formData, author: loggedInUser };
-      addNewCard(cardWithAuthor);
-      setFormData(getInitialFormData());
-    };
+        e.preventDefault();
+        const cardWithAuthor = { ...formData, author: loggedInUser }; 
+        addNewCard(cardWithAuthor);
+        setFormData(getInitialFormData());
+      };
   
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-      const { name, value } = e.target;
-      setFormData((prevFormData: Card) => ({ ...prevFormData, [name]: value }));
-    };
+        const { name, value } = e.target;
+        if (name === 'author') {
+          setFormData((prevFormData: Card) => ({
+            ...prevFormData,
+            author: { ...prevFormData.author, name: value },
+          }));
+        } else {
+          setFormData((prevFormData: Card) => ({ ...prevFormData, [name]: value }));
+        }
+      };
   
     const handleStatusChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
       const { value } = e.target;
