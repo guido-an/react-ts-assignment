@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, Status, Category } from './types';
+import { Card, Status, Category } from '../types';
 
 interface AddCardFormProps {
   addNewCard: (newCard: Card) => void;
