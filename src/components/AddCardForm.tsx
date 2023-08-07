@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Card, Status, Category } from '../types';
+import { Card, Status, Category, Author } from '../types';
 
 interface AddCardFormProps {
   addNewCard: (newCard: Card) => void;
+  loggedInUser: Author; 
 }
 
 const getInitialFormData = (): Card => ({
@@ -10,7 +11,7 @@ const getInitialFormData = (): Card => ({
   status: Status.Published,
   content: '',
   category: Category.Other,
-  author: '',
+  author: { name: '', id: '' },
 });
 
   
@@ -87,7 +88,7 @@ const AddCardForm: React.FC<AddCardFormProps> = ({ addNewCard }) => {
           type="text"
           id="author"
           name="author"
-          value={formData.author}
+          value={formData.author.name}
           onChange={handleChange}
           required
         />

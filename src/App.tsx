@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
-import { Card, Status, Category } from './types';
+import { Card, Status, Category, Author } from './types';
 import AddCardForm from './components/AddCardForm';
 import presetData from './presetData';
+
+
+// This is a mock logged-in user (for testing purposes)
+const loggedInUser: Author = { name: 'John Doe', id: '123' }; 
 
 const App: React.FC = () => {
   const [cards, setCards] = useState<Card[]>(presetData);
@@ -13,7 +17,7 @@ const App: React.FC = () => {
   return (
     <div>
       <h1>Mini-Blog Application</h1>
-      <AddCardForm addNewCard={addNewCard} />
+      <AddCardForm addNewCard={addNewCard} loggedInUser={loggedInUser} />
       <div>
         {cards.map((card, index) => (
           <div key={index}>
@@ -21,7 +25,7 @@ const App: React.FC = () => {
             <p>Status: {card.status}</p>
             <p>Content: {card.content}</p>
             <p>Category: {card.category}</p>
-            <p>Author: {card.author}</p>
+            <p>Author: {card.author.name}</p>
           </div>
         ))}
       </div>

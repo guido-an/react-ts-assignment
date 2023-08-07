@@ -10,13 +10,18 @@ export enum Status {
     Sociology = 'Sociology',
     Other = 'Other'
   }
+
+  export interface Author {
+    id: string;
+    name: string;
+  }
   
   export interface Card {
     name: string;
     status: Status;
     content: string;
     category: Category;
-    author: string;
+    author: Author;
   }
   
   
