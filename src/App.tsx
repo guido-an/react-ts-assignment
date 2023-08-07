@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { Card, Status, Category, Author } from './types';
+import { Card, Author } from './types';
 import AddCardForm from './components/AddCardForm';
 import presetData from './presetData';
+import CardItem from './components/CardItem';
 
 
-// This is a mock logged-in user (for testing purposes)
+// This is a mock logged-in user (for simulating the edit functionality)
 const loggedInUser: Author = { name: 'John Doe', id: '123' }; 
 
 const App: React.FC = () => {
@@ -20,14 +21,9 @@ const App: React.FC = () => {
       <AddCardForm addNewCard={addNewCard} loggedInUser={loggedInUser} />
       <div>
         {cards.map((card, index) => (
-          <div key={index}>
-            <h2>{card.name}</h2>
-            <p>Status: {card.status}</p>
-            <p>Content: {card.content}</p>
-            <p>Category: {card.category}</p>
-            <p>Author: {card.author.name}</p>
-          </div>
+          <CardItem card={card} loggedInUser={loggedInUser} />
         ))}
+        
       </div>
     </div>
   );

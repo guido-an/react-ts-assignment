@@ -7,37 +7,37 @@ interface AddCardFormProps {
 }
 
 const getInitialFormData = (): Card => ({
-  name: '',
-  status: Status.Published,
-  content: '',
-  category: Category.Other,
-  author: { name: '', id: '' },
-});
-
+    name: '',
+    status: Status.Published,
+    content: '',
+    category: Category.Other,
+    author: { name: '', id: '' },
+  });
   
-const AddCardForm: React.FC<AddCardFormProps> = ({ addNewCard }) => {
-  const [formData, setFormData] = useState<Card>(getInitialFormData);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    addNewCard(formData);
-    setFormData(getInitialFormData);
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData((prevFormData: Card) => ({ ...prevFormData, [name]: value }));
-  };
-
-  const handleStatusChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const { value } = e.target;
-    setFormData((prevFormData: Card) => ({ ...prevFormData, status: value as Status }));
-  };
-
-  const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const { value } = e.target;
-    setFormData((prevFormData: Card) => ({ ...prevFormData, category: value as Category }));
-  };
+  const AddCardForm: React.FC<AddCardFormProps> = ({ addNewCard, loggedInUser }) => {
+    const [formData, setFormData] = useState<Card>(getInitialFormData);
+  
+    const handleSubmit = (e: React.FormEvent) => {
+      e.preventDefault();
+      const cardWithAuthor = { ...formData, author: loggedInUser };
+      addNewCard(cardWithAuthor);
+      setFormData(getInitialFormData());
+    };
+  
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      const { name, value } = e.target;
+      setFormData((prevFormData: Card) => ({ ...prevFormData, [name]: value }));
+    };
+  
+    const handleStatusChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+      const { value } = e.target;
+      setFormData((prevFormData: Card) => ({ ...prevFormData, status: value as Status }));
+    };
+  
+    const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+      const { value } = e.target;
+      setFormData((prevFormData: Card) => ({ ...prevFormData, category: value as Category }));
+    };
 
   return (
     <form onSubmit={handleSubmit}>
