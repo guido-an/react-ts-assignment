@@ -92,7 +92,7 @@ const AddCardForm: React.FC<AddCardFormProps> = ({ addNewCard }) => {
           required
         />
       </div>
-      <button type="submit">Add Card</button>
+      <button type="submit" data-testid="add-card-button">Add Card</button>
     </form>
   );
 };
