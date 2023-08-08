@@ -1,6 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import AddCardForm from '../components/AddCardForm';
-import { v4 as uuidv4 } from 'uuid';
 
 describe('Test AddCardForm component', () => {
   test('should submit the form with correct data', () => {
