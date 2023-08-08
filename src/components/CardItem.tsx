@@ -47,20 +47,24 @@ const CardItem: React.FC<CardItemProps> = ({ card, loggedInUser }) => {
       <div>Category: {editedCard.category}</div>
       <div>Author: {card.author.name}</div>
       {!isEditMode && loggedInUser.id === card.author.id && (
-        <button onClick={handleEditClick}>Edit</button>
+        <button onClick={handleEditClick} data-testid="edit">Edit</button>
       )}
       {isEditMode && (
         <div>
-          <input type="text" value={editedCard.name} onChange={handleNameChange} />
-          <textarea value={editedCard.content} onChange={handleContentChange} />
-          <select value={editedCard.status} onChange={handleStatusChange}>
+          <label htmlFor='name'>Name:</label>
+          <input id="name" type="text" value={editedCard.name} onChange={handleNameChange} />
+          <label htmlFor='content'>Content:</label>
+          <textarea id="content" value={editedCard.content} onChange={handleContentChange} />
+          <label htmlFor='status'>Status:</label>
+          <select id="status" value={editedCard.status} onChange={handleStatusChange}>
             {Object.values(Status).map((status) => (
               <option key={status} value={status}>
                 {status}
               </option>
             ))}
           </select>
-          <select value={editedCard.category} onChange={handleCategoryChange}>
+          <label htmlFor='category'>Category:</label>
+          <select id="category" value={editedCard.category} onChange={handleCategoryChange}>
             {Object.values(Category).map((category) => (
               <option key={category} value={category}>
                 {category}
