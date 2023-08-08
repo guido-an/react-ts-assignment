@@ -6,34 +6,27 @@ interface AddCardFormProps {
   loggedInUser: Author; 
 }
 
-const getInitialFormData = (): Card => ({
+const getInitialFormData = (loggedInUser: Author): Card => ({
     name: '',
     status: Status.Published,
     content: '',
     category: Category.Other,
-    author: { name: '', id: '' },
+    author: loggedInUser,
   });
   
   const AddCardForm: React.FC<AddCardFormProps> = ({ addNewCard, loggedInUser }) => {
-    const [formData, setFormData] = useState<Card>(getInitialFormData);
+    const [formData, setFormData] = useState<Card>(getInitialFormData(loggedInUser));
   
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         const cardWithAuthor = { ...formData, author: loggedInUser }; 
         addNewCard(cardWithAuthor);
-        setFormData(getInitialFormData());
+        setFormData(getInitialFormData(loggedInUser));
       };
   
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
-        if (name === 'author') {
-          setFormData((prevFormData: Card) => ({
-            ...prevFormData,
-            author: { ...prevFormData.author, name: value },
-          }));
-        } else {
-          setFormData((prevFormData: Card) => ({ ...prevFormData, [name]: value }));
-        }
+        setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
       };
   
     const handleStatusChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -88,17 +81,6 @@ const getInitialFormData = (): Card => ({
             </option>
           ))}
         </select>
-      </div>
-      <div>
-        <label htmlFor="author">Author:</label>
-        <input
-          type="text"
-          id="author"
-          name="author"
-          value={formData.author.name}
-          onChange={handleChange}
-          required
-        />
       </div>
       <button type="submit" data-testid="add-card-button">Add Card</button>
     </form>

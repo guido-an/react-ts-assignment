@@ -17,7 +17,6 @@ describe('Test AddCardForm component', () => {
     fireEvent.change(screen.getByLabelText(/status/i), { target: { value: 'Published' } });
     fireEvent.change(screen.getByLabelText(/content/i), { target: { value: 'This is a test card content.' } });
     fireEvent.change(screen.getByLabelText(/category/i), { target: { value: 'Technology' } });
-    fireEvent.change(screen.getByLabelText(/author/i), { target: { value: loggedInUser.name } });
 
     // Simulate form submission by clicking the submit button
     fireEvent.click(screen.getByTestId('add-card-button'));
