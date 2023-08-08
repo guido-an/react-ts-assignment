@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Card, Status, Category, Author } from '../types';
 import DeleteCardButton from './DeleteCardButton';
+import Modal from '../shared/Modal';
 interface CardItemProps {
   card: Card;
   loggedInUser: Author;
@@ -51,7 +52,8 @@ const CardItem: React.FC<CardItemProps> = ({ card, loggedInUser, updateCard, del
         <button onClick={handleEditClick} data-testid="edit">Edit</button>
       )}
       {isEditMode && (
-        <div>
+        <Modal isOpen={isEditMode} onClose={() => setIsEditMode(false)}>
+         <div>
           <label htmlFor='name'>Name:</label>
           <input id="name" type="text" value={editedCard.name} onChange={handleNameChange} />
           <label htmlFor='content'>Content:</label>
@@ -75,6 +77,7 @@ const CardItem: React.FC<CardItemProps> = ({ card, loggedInUser, updateCard, del
           <button onClick={handleSaveClick}>Save</button>
           <DeleteCardButton deleteCard={() => deleteCard(card.id)} />
         </div>
+        </Modal>
       )}
     </div>
   );
