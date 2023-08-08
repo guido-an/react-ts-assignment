@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
-import { Card, Status, Category, Author } from './types';
+import React from 'react';
+import { Card, Author } from './types';
 import AddCardForm from './components/AddCardForm';
-import presetData from './presetData';
 import CardItem from './components/CardItem';
+import presetData from './presetData';
+import useLocalStorage from './hooks/useLocalStorage';
 
-// This is a mock logged-in user (for simulating the edit functionality)
-const loggedInUser: Author = { name: 'John Doe', id: '123' }; 
+const loggedInUser: Author = { name: 'John Doe', id: '123' };
 
 const App: React.FC = () => {
-  const [cards, setCards] = useState<Card[]>(presetData);
+  const [cards, setCards] = useLocalStorage('cards', presetData);
 
   const addNewCard = (newCard: Card) => {
-    setCards([...cards, newCard]);
+    setCards((prevCards) => [...prevCards, newCard]);
   };
 
   return (
@@ -20,9 +20,8 @@ const App: React.FC = () => {
       <AddCardForm addNewCard={addNewCard} loggedInUser={loggedInUser} />
       <div>
         {cards.map((card, index) => (
-          <CardItem card={card} loggedInUser={loggedInUser} />
+          <CardItem key={index} card={card} loggedInUser={loggedInUser} />
         ))}
-        
       </div>
     </div>
   );

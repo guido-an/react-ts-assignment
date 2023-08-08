@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Card, Status, Category, Author } from '../types';
+import { v4 as uuidv4 } from 'uuid';
 
 interface AddCardFormProps {
   addNewCard: (newCard: Card) => void;
@@ -7,6 +8,7 @@ interface AddCardFormProps {
 }
 
 const getInitialFormData = (loggedInUser: Author): Card => ({
+    id: '', 
     name: '',
     status: Status.Published,
     content: '',
@@ -23,8 +25,9 @@ const getInitialFormData = (loggedInUser: Author): Card => ({
         addNewCard(cardWithAuthor);
         setFormData(getInitialFormData(loggedInUser));
       };
+
   
-     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
         setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
       };
@@ -41,6 +44,15 @@ const getInitialFormData = (loggedInUser: Author): Card => ({
 
   return (
     <form onSubmit={handleSubmit}>
+     <>
+       <input 
+          type="text" 
+          name="id" 
+          onChange={handleChange} 
+          value={uuidv4()} 
+          data-testid="card-id" 
+          hidden />
+     </>
       <div>
         <label htmlFor="name">Name:</label>
         <input

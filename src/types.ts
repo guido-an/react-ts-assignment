@@ -17,6 +17,7 @@ export enum Status {
   }
   
   export interface Card {
+    id: string; 
     name: string;
     status: Status;
     content: string;
