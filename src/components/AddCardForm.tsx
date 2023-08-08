@@ -21,12 +21,11 @@ const getInitialFormData = (loggedInUser: Author): Card => ({
   
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        const cardWithAuthor = { ...formData, author: loggedInUser }; 
+        const cardWithAuthor = { ...formData, author: loggedInUser, id: uuidv4() }; // Generate ID here
         addNewCard(cardWithAuthor);
         setFormData(getInitialFormData(loggedInUser));
       };
 
-  
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
         setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
@@ -44,7 +43,7 @@ const getInitialFormData = (loggedInUser: Author): Card => ({
 
   return (
     <form onSubmit={handleSubmit}>
-     <>
+     {/* <>
        <input 
           type="text" 
           name="id" 
@@ -52,7 +51,7 @@ const getInitialFormData = (loggedInUser: Author): Card => ({
           value={uuidv4()} 
           data-testid="card-id" 
           hidden />
-     </>
+     </> */}
       <div>
         <label htmlFor="name">Name:</label>
         <input

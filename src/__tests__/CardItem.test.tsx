@@ -12,8 +12,14 @@ const renderCard = (loggedInUser: Author) => {
     author: { name: 'John Doe', id: '123' },
   };
   const mockUpdateCard = jest.fn();
+  const mockDeleteCard = jest.fn();
 
-  return render(<CardItem card={card} loggedInUser={loggedInUser} updateCard={mockUpdateCard}/>);
+  return render(<CardItem 
+                   card={card} 
+                   loggedInUser={loggedInUser} 
+                   updateCard={mockUpdateCard} 
+                   deleteCard={mockDeleteCard}
+                />);
 }
 
 describe('Test CardItem component', () => {
@@ -74,5 +80,4 @@ describe('Test CardItem component', () => {
     expect(screen.getByText('Content: Updated content')).toBeInTheDocument();
     expect(screen.getByText('Category: Physics')).toBeInTheDocument();
   });
-
 });
