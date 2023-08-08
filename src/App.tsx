@@ -14,13 +14,20 @@ const App: React.FC = () => {
     setCards((prevCards) => [...prevCards, newCard]);
   };
 
+  const updateCard = (updatedCard: Card) => {
+    const updatedCards = cards.map((card) =>
+      card.id === updatedCard.id ? updatedCard : card
+    );
+    setCards(updatedCards);
+  };
+
   return (
     <div>
       <h1>Mini-Blog Application</h1>
       <AddCardForm addNewCard={addNewCard} loggedInUser={loggedInUser} />
       <div>
         {cards.map((card, index) => (
-          <CardItem key={index} card={card} loggedInUser={loggedInUser} />
+          <CardItem key={index} card={card} loggedInUser={loggedInUser} updateCard={updateCard} />
         ))}
       </div>
     </div>

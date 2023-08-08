@@ -4,9 +4,10 @@ import { Card, Status, Category, Author } from '../types';
 interface CardItemProps {
   card: Card;
   loggedInUser: Author;
+  updateCard: (card: Card) => void
 }
 
-const CardItem: React.FC<CardItemProps> = ({ card, loggedInUser }) => {
+const CardItem: React.FC<CardItemProps> = ({ card, loggedInUser, updateCard }) => {
   const [isEditMode, setIsEditMode] = useState(false);
   const [editedCard, setEditedCard] = useState<Card>({ ...card });
 
@@ -34,8 +35,7 @@ const CardItem: React.FC<CardItemProps> = ({ card, loggedInUser }) => {
   };
 
   const handleSaveClick = () => {
-    console.log('Edited Card:', editedCard);
-
+    updateCard(editedCard);
     setIsEditMode(false);
   };
 
