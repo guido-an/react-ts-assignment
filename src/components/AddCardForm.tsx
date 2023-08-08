@@ -1,45 +1,58 @@
 import React, { useState } from 'react';
-import { Card, Status, Category } from '../types';
+import { Card, Status, Category, Author } from '../types';
+import { v4 as uuidv4 } from 'uuid';
 
 interface AddCardFormProps {
   addNewCard: (newCard: Card) => void;
+  loggedInUser: Author; 
 }
 
-const getInitialFormData = (): Card => ({
-  name: '',
-  status: Status.Published,
-  content: '',
-  category: Category.Other,
-  author: '',
-});
+const getInitialFormData = (loggedInUser: Author): Card => ({
+    id: '', 
+    name: '',
+    status: Status.Published,
+    content: '',
+    category: Category.Other,
+    author: loggedInUser,
+  });
+  
+  const AddCardForm: React.FC<AddCardFormProps> = ({ addNewCard, loggedInUser }) => {
+    const [formData, setFormData] = useState<Card>(getInitialFormData(loggedInUser));
+  
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        const cardWithAuthor = { ...formData, author: loggedInUser }; 
+        addNewCard(cardWithAuthor);
+        setFormData(getInitialFormData(loggedInUser));
+      };
 
   
-const AddCardForm: React.FC<AddCardFormProps> = ({ addNewCard }) => {
-  const [formData, setFormData] = useState<Card>(getInitialFormData);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    addNewCard(formData);
-    setFormData(getInitialFormData);
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData((prevFormData: Card) => ({ ...prevFormData, [name]: value }));
-  };
-
-  const handleStatusChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const { value } = e.target;
-    setFormData((prevFormData: Card) => ({ ...prevFormData, status: value as Status }));
-  };
-
-  const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const { value } = e.target;
-    setFormData((prevFormData: Card) => ({ ...prevFormData, category: value as Category }));
-  };
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const { name, value } = e.target;
+        setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
+      };
+  
+    const handleStatusChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+      const { value } = e.target;
+      setFormData((prevFormData: Card) => ({ ...prevFormData, status: value as Status }));
+    };
+  
+    const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+      const { value } = e.target;
+      setFormData((prevFormData: Card) => ({ ...prevFormData, category: value as Category }));
+    };
 
   return (
     <form onSubmit={handleSubmit}>
+     <>
+       <input 
+          type="text" 
+          name="id" 
+          onChange={handleChange} 
+          value={uuidv4()} 
+          data-testid="card-id" 
+          hidden />
+     </>
       <div>
         <label htmlFor="name">Name:</label>
         <input
@@ -80,17 +93,6 @@ const AddCardForm: React.FC<AddCardFormProps> = ({ addNewCard }) => {
             </option>
           ))}
         </select>
-      </div>
-      <div>
-        <label htmlFor="author">Author:</label>
-        <input
-          type="text"
-          id="author"
-          name="author"
-          value={formData.author}
-          onChange={handleChange}
-          required
-        />
       </div>
       <button type="submit" data-testid="add-card-button">Add Card</button>
     </form>
