@@ -21,13 +21,18 @@ const App: React.FC = () => {
     setCards(updatedCards);
   };
 
+  const deleteCard = (cardId: string) => {
+    const updatedCards = cards.filter((card) => card.id !== cardId);
+    setCards(updatedCards);
+  };
+
   return (
     <div>
       <h1>Mini-Blog Application</h1>
       <AddCardForm addNewCard={addNewCard} loggedInUser={loggedInUser} />
       <div>
         {cards.map((card, index) => (
-          <CardItem key={index} card={card} loggedInUser={loggedInUser} updateCard={updateCard} />
+          <CardItem key={index} card={card} loggedInUser={loggedInUser} updateCard={updateCard} deleteCard={deleteCard} />
         ))}
       </div>
     </div>

@@ -1,6 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import AddCardForm from '../components/AddCardForm';
-import { v4 as uuidv4 } from 'uuid';
+
+jest.mock('uuid', () => ({ v4: () => '123456789' }));
 
 describe('Test AddCardForm component', () => {
   test('should submit the form with correct data', () => {
@@ -14,7 +15,6 @@ describe('Test AddCardForm component', () => {
     render(<AddCardForm addNewCard={mockAddNewCard} loggedInUser={loggedInUser} />);
 
     // Fill in the form fields with test data using fireEvent.change
-    fireEvent.change(screen.getByTestId('card-id'), { target: { value: '123' } });
     fireEvent.change(screen.getByLabelText(/name/i), { target: { value: 'Test Card' } });
     fireEvent.change(screen.getByLabelText(/status/i), { target: { value: 'Published' } });
     fireEvent.change(screen.getByLabelText(/content/i), { target: { value: 'This is a test card content.' } });
@@ -27,7 +27,7 @@ describe('Test AddCardForm component', () => {
     const { id, name } = loggedInUser;
 
     expect(mockAddNewCard).toHaveBeenCalledWith({
-      id: '123',
+      id: '123456789', 
       name: 'Test Card',
       status: 'Published',
       content: 'This is a test card content.',

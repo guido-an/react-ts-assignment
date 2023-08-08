@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { Card, Status, Category, Author } from '../types';
-
+import DeleteCardButton from './DeleteCardButton';
 interface CardItemProps {
   card: Card;
   loggedInUser: Author;
-  updateCard: (card: Card) => void
+  updateCard: (card: Card) => void,
+  deleteCard: (cardId: string) => void,  
 }
 
-const CardItem: React.FC<CardItemProps> = ({ card, loggedInUser, updateCard }) => {
+const CardItem: React.FC<CardItemProps> = ({ card, loggedInUser, updateCard, deleteCard }) => {
   const [isEditMode, setIsEditMode] = useState(false);
   const [editedCard, setEditedCard] = useState<Card>({ ...card });
 
@@ -72,6 +73,7 @@ const CardItem: React.FC<CardItemProps> = ({ card, loggedInUser, updateCard }) =
             ))}
           </select>
           <button onClick={handleSaveClick}>Save</button>
+          <DeleteCardButton deleteCard={() => deleteCard(card.id)} />
         </div>
       )}
     </div>

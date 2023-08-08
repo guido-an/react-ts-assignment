@@ -2,20 +2,30 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import CardItem from '../components/CardItem';
 import { Card, Status, Category, Author } from '../types';
 
+const renderCard = (loggedInUser: Author) => {
+  const card: Card = {
+    id: '123',
+    name: 'Test Card',
+    status: Status.Published,
+    content: 'This is a test card content.',
+    category: Category.Technology,
+    author: { name: 'John Doe', id: '123' },
+  };
+  const mockUpdateCard = jest.fn();
+  const mockDeleteCard = jest.fn();
+
+  return render(<CardItem 
+                   card={card} 
+                   loggedInUser={loggedInUser} 
+                   updateCard={mockUpdateCard} 
+                   deleteCard={mockDeleteCard}
+                />);
+}
+
 describe('Test CardItem component', () => {
   test('should render card details in view mode', () => {
-    // Create a mock card and logged-in user data
-    const card: Card = {
-      name: 'Test Card',
-      status: Status.Published,
-      content: 'This is a test card content.',
-      category: Category.Technology,
-      author: { name: 'John Doe', id: '123' },
-    };
     const loggedInUser: Author = { name: 'Jane Smith', id: '456' };
-
-    // Render the CardItem component
-    render(<CardItem card={card} loggedInUser={loggedInUser} />);
+    renderCard(loggedInUser)
 
     // Assert that the card details are rendered in view mode
     expect(screen.getByText('Test Card')).toBeInTheDocument();
@@ -29,17 +39,8 @@ describe('Test CardItem component', () => {
   });
 
   test('should display "Edit" button to the author and entering edit mode when clicking on it', () => {
-    // Create a mock card and logged-in user data
-    const card: Card = {
-      name: 'Test Card',
-      status: Status.Published,
-      content: 'This is a test card content.',
-      category: Category.Technology,
-      author: { name: 'John Doe', id: '123' },
-    };
     const loggedInUser: Author = { name: 'John Doe', id: '123' };
-
-    render(<CardItem card={card} loggedInUser={loggedInUser} />);
+    renderCard(loggedInUser)
 
     // Assert that the "Edit" button is rendered for the author
     const editButton = screen.getByText('Edit');
@@ -58,17 +59,8 @@ describe('Test CardItem component', () => {
   });
 
   test('should update card details when clicking "Save"', () => {
-    // Create a mock card and logged-in user data
-    const card: Card = {
-      name: 'Test Card',
-      status: Status.Published,
-      content: 'This is a test card content.',
-      category: Category.Technology,
-      author: { name: 'John Doe', id: '123' },
-    };
     const loggedInUser: Author = { name: 'John Doe', id: '123' };
-
-    render(<CardItem card={card} loggedInUser={loggedInUser} />);
+    renderCard(loggedInUser)
 
     // Click the "Edit" button
     fireEvent.click(screen.getByText('Edit'));
@@ -88,5 +80,4 @@ describe('Test CardItem component', () => {
     expect(screen.getByText('Content: Updated content')).toBeInTheDocument();
     expect(screen.getByText('Category: Physics')).toBeInTheDocument();
   });
-
 });
