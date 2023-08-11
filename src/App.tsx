@@ -28,8 +28,7 @@ const App: React.FC = () => {
   };
 
   return (
-      <Layout>
-        <AddCardForm addNewCard={addNewCard} loggedInUser={loggedInUser} />
+      <Layout addNewCard={addNewCard} loggedInUser={loggedInUser}>
         <div>
           {cards.map((card, index) => (
             <CardItem key={index} card={card} loggedInUser={loggedInUser} updateCard={updateCard} deleteCard={deleteCard} />

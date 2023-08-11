@@ -1,0 +1,68 @@
+@import '../../styles//global.scss';
+
+.add-card-form {
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    padding: 20px 20px 40px;
+    border-radius: 8px;
+    
+    .form-group {
+      margin-bottom: 20px;
+      
+      label {
+        font-weight: bold;
+        margin-bottom: 5px;
+        font-size: 14px;
+        display: block;
+        color: $black;
+      }
+
+      textarea {
+        height: 5rem;
+      }
+      
+      input,
+      select,
+      textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        &:focus {
+            outline: none;
+          }
+        &:hover {
+            cursor: pointer;
+        }
+      }
+    }
+    
+    .select {
+        appearance: none;
+        // padding-right: 30px;
+        background: url('data:image/svg+xml;utf8,<svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path d="M8 12.5l-4.146-4.146a.25.25 0 0 1 0-.354l.708-.708a.25.25 0 0 1 .354 0L8 10.793l3.084-3.085a.25.25 0 0 1 .354 0l.708.708a.25.25 0 0 1 0 .354L8 12.5z"></path></svg>')
+        no-repeat right 10px center;
+        background-size: 14px;
+    }
+    
+    .add-button {
+      background-color: $light-blue;
+      color: #ffffff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.2s ease-in-out;
+      height: 40px;
+      margin-top: 20px;
+      
+      &:hover {
+        background-color: $medium-blue;
+      }
+    }
+  }
+  
