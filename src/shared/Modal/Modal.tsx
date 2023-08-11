@@ -1,4 +1,5 @@
 import React, { ReactNode } from 'react';
+import './Modal.scss'; // Import the SCSS file
 
 interface ModalProps {
   isOpen: boolean;

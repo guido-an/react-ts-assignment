@@ -1,9 +1,10 @@
 import React from 'react';
 import { Card, Author } from './types';
-import AddCardForm from './components/AddCardForm';
-import CardItem from './components/CardItem';
+import AddCardForm from './components/AddCardForm/AddCardForm';
+import CardItem from './components/CardItem/CardItem';
 import presetData from './presetData';
 import useLocalStorage from './hooks/useLocalStorage';
+import Layout from './components/Layout/Layout';
 
 const loggedInUser: Author = { name: 'John Doe', id: '123' };
 
@@ -27,15 +28,14 @@ const App: React.FC = () => {
   };
 
   return (
-    <div>
-      <h1>Mini-Blog Application</h1>
-      <AddCardForm addNewCard={addNewCard} loggedInUser={loggedInUser} />
-      <div>
-        {cards.map((card, index) => (
-          <CardItem key={index} card={card} loggedInUser={loggedInUser} updateCard={updateCard} deleteCard={deleteCard} />
-        ))}
-      </div>
-    </div>
+      <Layout>
+        <AddCardForm addNewCard={addNewCard} loggedInUser={loggedInUser} />
+        <div>
+          {cards.map((card, index) => (
+            <CardItem key={index} card={card} loggedInUser={loggedInUser} updateCard={updateCard} deleteCard={deleteCard} />
+          ))}
+        </div>
+      </Layout>
   );
 };
 

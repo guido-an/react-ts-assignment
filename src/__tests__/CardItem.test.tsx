@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import CardItem from '../components/CardItem';
+import CardItem from '../components/CardItem/CardItem';
 import { Card, Status, Category, Author } from '../types';
 
 const renderCard = (loggedInUser: Author) => {

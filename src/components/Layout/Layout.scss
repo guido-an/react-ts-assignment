@@ -1,0 +1,29 @@
+@import '../../styles//global.scss';
+
+.layout {
+    display: flex;
+    flex-direction: column; 
+    
+    .sidebar {
+      width: 100%; 
+      background-color: $light-blue;
+      padding: 20px;
+    }
+    
+    .main-content {
+      padding: 20px;
+    }
+  
+    @media (min-width: 768px) {
+      flex-direction: row; 
+      
+      .sidebar {
+        width: 20%; 
+      }
+      
+      .main-content {
+        flex: 1;
+      }
+    }
+  }
+  

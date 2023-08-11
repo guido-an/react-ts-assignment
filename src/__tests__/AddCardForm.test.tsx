@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import AddCardForm from '../components/AddCardForm';
+import AddCardForm from '../components/AddCardForm/AddCardForm';
 
 jest.mock('uuid', () => ({ v4: () => '123456789' }));
 

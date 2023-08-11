@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, Status, Category, Author } from '../types';
+import { Card, Status, Category, Author } from '../../types';
 import { v4 as uuidv4 } from 'uuid';
 
 interface AddCardFormProps {
@@ -43,15 +43,6 @@ const getInitialFormData = (loggedInUser: Author): Card => ({
 
   return (
     <form onSubmit={handleSubmit}>
-     {/* <>
-       <input 
-          type="text" 
-          name="id" 
-          onChange={handleChange} 
-          value={uuidv4()} 
-          data-testid="card-id" 
-          hidden />
-     </> */}
       <div>
         <label htmlFor="name">Name:</label>
         <input

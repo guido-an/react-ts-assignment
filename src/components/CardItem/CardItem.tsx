@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Card, Status, Category, Author } from '../types';
-import DeleteCardButton from './DeleteCardButton';
-import Modal from '../shared/Modal';
+import { Card, Status, Category, Author } from '../../types';
+import DeleteCardButton from '../DeleteCardButton/DeleteCardButton';
+import Modal from '../../shared/Modal/Modal';
 interface CardItemProps {
   card: Card;
   loggedInUser: Author;

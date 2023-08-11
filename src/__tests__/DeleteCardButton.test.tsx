@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import DeleteCardButton from '../components/DeleteCardButton';
+import DeleteCardButton from '../components/DeleteCardButton/DeleteCardButton';
 
 describe('Test DeleteCardButton component', () => {
   test('should call deleteCard function with correct cardId when confirming', () => {
