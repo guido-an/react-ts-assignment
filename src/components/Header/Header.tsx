@@ -31,7 +31,7 @@ const Header: React.FC<HeaderProps> = ({ addNewCard, loggedInUser }) => {
     </header>
     {isModalOpen && (
         <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-            <AddCardForm addNewCard={addNewCard} loggedInUser={loggedInUser} />
+            <AddCardForm addNewCard={addNewCard} loggedInUser={loggedInUser} setIsModalOpen={setIsModalOpen} />
         </Modal>
       )}
     </>

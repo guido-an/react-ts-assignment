@@ -6,6 +6,7 @@ import './AddCardForm.scss'; // Import the SCSS file
 interface AddCardFormProps {
   addNewCard: (newCard: Card) => void;
   loggedInUser: Author;
+  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const getInitialFormData = (loggedInUser: Author): Card => ({
@@ -17,7 +18,7 @@ const getInitialFormData = (loggedInUser: Author): Card => ({
   author: loggedInUser,
 });
 
-const AddCardForm: React.FC<AddCardFormProps> = ({ addNewCard, loggedInUser }) => {
+const AddCardForm: React.FC<AddCardFormProps> = ({ addNewCard, loggedInUser, setIsModalOpen }) => {
   const [formData, setFormData] = useState<Card>(getInitialFormData(loggedInUser));
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -25,6 +26,7 @@ const AddCardForm: React.FC<AddCardFormProps> = ({ addNewCard, loggedInUser }) =
     const cardWithAuthor = { ...formData, author: loggedInUser, id: uuidv4() }; // Generate ID here
     addNewCard(cardWithAuthor);
     setFormData(getInitialFormData(loggedInUser));
+    setIsModalOpen(false)
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -97,7 +99,7 @@ const AddCardForm: React.FC<AddCardFormProps> = ({ addNewCard, loggedInUser }) =
           ))}
         </select>
       </div>
-      <button type="submit" className="add-button" data-testid="add-card-button">
+      <button type="submit" className="form-button" data-testid="add-card-button">
         ADD CARD
       </button>
     </form>

@@ -1,31 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
+import './DeleteCardButton.scss'
 
 interface DeleteCardButtonProps {
-    deleteCard: () => void;
+  deleteCard: () => void;
 }
 
 const DeleteCardButton: React.FC<DeleteCardButtonProps> = ({ deleteCard }) => {
-  const [isConfirming, setIsConfirming] = useState(false);
+  const askConfirmation = () => {
+    const confirmMessage = 'Are you sure you want to delete this card?';
+    const isConfirmed = window.confirm(confirmMessage);
 
-  const handleDeleteClick = () => {
-    if (isConfirming) {
-       deleteCard();
-    } else {
-      setIsConfirming(true);
+    if (isConfirmed) {
+      deleteCard();
     }
   };
 
   return (
-    <div>
-      {isConfirming ? (
-        <>
-          <p>Are you sure you want to delete this card?</p>
-          <button onClick={deleteCard}>Confirm</button>
-          <button onClick={() => setIsConfirming(false)}>Cancel</button>
-        </>
-      ) : (
-        <button onClick={handleDeleteClick}>Delete</button>
-      )}
+    <div className="delete-card-wrapper">
+      <button onClick={askConfirmation}>DELETE</button>
     </div>
   );
 };
