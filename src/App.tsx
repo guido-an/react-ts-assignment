@@ -1,6 +1,5 @@
 import React from 'react';
 import { Card, Author } from './types';
-import AddCardForm from './components/AddCardForm/AddCardForm';
 import CardItem from './components/CardItem/CardItem';
 import presetData from './presetData';
 import useLocalStorage from './hooks/useLocalStorage';
@@ -28,13 +27,11 @@ const App: React.FC = () => {
   };
 
   return (
-      <Layout addNewCard={addNewCard} loggedInUser={loggedInUser}>
-        <div>
-          {cards.map((card, index) => (
-            <CardItem key={index} card={card} loggedInUser={loggedInUser} updateCard={updateCard} deleteCard={deleteCard} />
-          ))}
-        </div>
-      </Layout>
+    <Layout addNewCard={addNewCard} loggedInUser={loggedInUser}>
+        {cards.map((card, index) => (
+          <CardItem key={index} card={card} loggedInUser={loggedInUser} updateCard={updateCard} deleteCard={deleteCard} />
+        ))}
+    </Layout>
   );
 };
 
