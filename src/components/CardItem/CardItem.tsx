@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './CardItem.scss'; // Import the SCSS file
 import { Card, Author } from '../../types';
 import DeleteCardButton from '../DeleteCardButton/DeleteCardButton';
-import Modal from '../../shared/Modal/Modal';
+import Modal from '../shared/Modal/Modal';
 import EditCardForm from '../EditCardForm/EditCardForm';
 
 interface CardItemProps {
