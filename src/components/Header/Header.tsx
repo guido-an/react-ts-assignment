@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Header.scss'; 
 import { Author, Card } from '../../types';
 import AddCardForm from '../AddCardForm/AddCardForm';
-import Modal from '../../shared/Modal/Modal';
+import Modal from '../shared/Modal/Modal';
 
 interface HeaderProps {
     addNewCard: (card: Card) => void,

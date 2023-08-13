@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import './CardItem.scss'; // Import the SCSS file
 import { Card, Author } from '../../types';
-import DeleteCardButton from '../DeleteCardButton/DeleteCardButton';
-import Modal from '../../shared/Modal/Modal';
+import DeleteCardButton from '../shared/DeleteCardButton/DeleteCardButton';
+import Modal from '../shared/Modal/Modal';
 import EditCardForm from '../EditCardForm/EditCardForm';
+import './CardItem.scss'; 
 
 interface CardItemProps {
   card: Card;

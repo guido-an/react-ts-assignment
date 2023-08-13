@@ -12,7 +12,9 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({ children, addNewCard, loggedInUser }) => {
   return (
     <div className="layout">
-      <div className="sidebar" />
+      <div className="sidebar">
+        <p>Sertis Frontend Test <span>Made with love by Guido Carucci</span></p>
+      </div>
       <div>
         <Header addNewCard={addNewCard} loggedInUser={loggedInUser} />
         <div className="main-content">
