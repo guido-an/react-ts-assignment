@@ -1,4 +1,4 @@
-import { useState, SetStateAction } from 'react';
+import { useState } from 'react';
 
 function useLocalStorage<T>(key: string, initialValue: T) {
   const storedValue = localStorage.getItem(key);
@@ -6,13 +6,12 @@ function useLocalStorage<T>(key: string, initialValue: T) {
 
   const [value, setValue] = useState<T>(initialStoredValue);
 
-  const updateValue = (newValue: SetStateAction<T>) => {
-    const updatedValue = typeof newValue === 'function' ? (newValue as Function)(value) : newValue;
-    localStorage.setItem(key, JSON.stringify(updatedValue));
-    setValue(updatedValue);
+  const updateValue = (newValue: T) => {
+    localStorage.setItem(key, JSON.stringify(newValue));
+    setValue(newValue);
   };
 
-  return [value, updateValue] as const;
+  return [value, updateValue];
 }
 
 export default useLocalStorage;
