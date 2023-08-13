@@ -4,8 +4,10 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #fafafa;
     padding: 10px 20px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+    border: 2px solid $light-grey;
+    margin: 20px;
     
     .header-items {
       display: flex;
@@ -14,7 +16,7 @@
         margin-right: 40px;
         color: $dark-grey;
         cursor: pointer;
-        font-size: 18px;
+        font-size: 1.2rem;
 
         &:hover {
             color: $black;
