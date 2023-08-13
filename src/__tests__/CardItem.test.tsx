@@ -28,10 +28,10 @@ describe('Test CardItem component', () => {
     renderCard(loggedInUser)
 
     expect(screen.getByText('Test Card')).toBeInTheDocument();
-    expect(screen.getByText('Status: Published')).toBeInTheDocument();
-    expect(screen.getByText('Content: This is a test card content.')).toBeInTheDocument();
-    expect(screen.getByText('Category: Technology')).toBeInTheDocument();
-    expect(screen.getByText('Author: John Doe')).toBeInTheDocument();
+    expect(screen.getByText('Published')).toBeInTheDocument();
+    expect(screen.getByText('This is a test card content.')).toBeInTheDocument();
+    expect(screen.getByText('Technology')).toBeInTheDocument();
+    expect(screen.getByText('John Doe')).toBeInTheDocument();
 
     expect(screen.queryByTestId('edit')).not.toBeInTheDocument();
   });

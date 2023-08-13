@@ -1,5 +1,5 @@
-// CardItem.tsx (Refactored)
 import React, { useState } from 'react';
+import './CardItem.scss'; // Import the SCSS file
 import { Card, Author } from '../../types';
 import DeleteCardButton from '../DeleteCardButton/DeleteCardButton';
 import Modal from '../../shared/Modal/Modal';
@@ -27,22 +27,30 @@ const CardItem: React.FC<CardItemProps> = ({ card, loggedInUser, updateCard, del
   };
 
   return (
-    <div>
-      <h2>{card.name}</h2>
-      <div>Status: {card.status}</div>
-      <div>Content: {card.content}</div>
-      <div>Category: {card.category}</div>
-      <div>Author: {card.author.name}</div>
-      {!isEditMode && loggedInUser.id === card.author.id && (
-        <button onClick={handleEditClick} data-testid="edit">Edit</button>
-      )}
-      {isEditMode && (
+    <div className='card-item'>
+      <div className='top'>
+        <h2 id='card-name'>{card.name}</h2>
+       <div className='top-right'>
+          {!isEditMode && loggedInUser.id === card.author.id && (
+          <button className='edit-button' onClick={handleEditClick} data-testid='edit'>
+            Edit
+          </button>
+        )}
+         <span className='status'>{card.status}</span>
+       </div>
+      </div>
+       {isEditMode && (
         <Modal isOpen={isEditMode} onClose={() => setIsEditMode(false)}>
           <EditCardForm card={card} onSave={handleSaveClick} />
           <DeleteCardButton deleteCard={() => deleteCard(card.id)} />
         </Modal>
       )}
-    </div>
+      <div className='card-content'>
+        <p  id="category">{card.category}</p>
+        <p id="content">{card.content}</p>
+        <p id="author-name">{card.author.name}</p>
+      </div>
+  </div>
   );
 };
 
