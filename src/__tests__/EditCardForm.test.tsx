@@ -1,17 +1,21 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import EditCardForm from '../components/EditCardForm/EditCardForm';
-import { Card, Status, Category } from '../types';
+import { Card, Status, Category, Author } from '../types';
 
 describe('Test EditCardForm component', () => {
   test('should update card details when clicking "Save"', () => {
+    const loggedInUser: Author = { name: 'John Doe', id: '123' };
+
     const card: Card = {
       id: '123',
       name: 'Initial Card',
       status: Status.Published,
       content: 'Initial content',
       category: Category.Technology,
+      author: loggedInUser,
     };
+
     const mockOnSave = jest.fn();
 
     render(<EditCardForm card={card} onSave={mockOnSave} />);
@@ -29,6 +33,7 @@ describe('Test EditCardForm component', () => {
       status: Status.Draft,
       content: 'Updated content',
       category: Category.Physics,
+      author: loggedInUser,
     });
   });
 });
