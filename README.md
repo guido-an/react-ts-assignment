@@ -29,7 +29,7 @@ Creating a working prototype of a mini-blog application that allows users to cre
  ```npm test```
 
  ## Note
-Please note that for simulating the edit functionality, a mock logged-in user is used. This is for the purpose of this coding test only. Other approaches would be used for a real world application.
+Please note that for simulating the edit functionality, a mock logged-in user is used. This is for the purpose of this coding test, other approaches would be used for a real-world application. Additionally, the application uses preset data to mock other users' cards. 
 
 
 
