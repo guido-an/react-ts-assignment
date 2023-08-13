@@ -1,0 +1,21 @@
+@import './fonts'; // Import the _fonts.scss file here
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif; 
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+// Colors
+$light-blue: #00ceff;
+$medium-blue: #00B6ed;
+$dark-blue: #00aedd;
+$black: #222;
+$dark-grey: #777;
+$light-grey: #fafafa;
+
+// Font Sizes
+$base-font-size: 16px;
+
+

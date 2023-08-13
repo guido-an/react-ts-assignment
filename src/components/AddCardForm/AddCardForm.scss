@@ -1,0 +1,22 @@
+@import '../../styles/global.scss';
+@import '../../styles/formStyles.scss';
+
+.add-card-form {
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  padding: 20px 20px 40px;
+  border-radius: 8px;
+
+  .form-group {
+    @extend .form-group;
+  }
+
+  .select {
+    @extend .select;
+  }
+
+  .form-button {
+    @extend .form-button;
+  }
+}
